@@ -1,0 +1,20 @@
+Package: mascutils
+Type: Package
+Title: Various utility functions of Martin Schmettow
+Version: 0.1.0
+Author: Martin Schmettow
+Maintainer: Martin Schmettow <schmettow@web.de>
+Description: Various utility functions from math and data
+    manipulation
+License: GPL-3
+LazyData: TRUE
+Depends:
+    dplyr,
+    tidyr
+Imports:
+    plyr,
+    stringr,
+    tibble
+Suggests:
+    testthat
+RoxygenNote: 5.0.1
