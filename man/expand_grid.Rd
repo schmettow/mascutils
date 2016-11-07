@@ -18,4 +18,3 @@ works like expand.grid, but returns a tibble data_frame
 \author{
 Martin Schmettow
 }
-

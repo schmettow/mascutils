@@ -129,7 +129,7 @@ z_score <-
 
 
 
-#' Removing unmeasured variables
+#' Removing completely unmeasured variables
 #'
 #' all columns that are completely NA are discarded
 #'
@@ -153,4 +153,24 @@ all_na <-
 
 any_not_na <-
   function(x) !all_na(x)
+
+
+#' Removing redundant variables
+#'
+#' all variables that do not vary are discarded
+#'
+#' @param D data frame
+#' @return data frame
+#'
+#'
+#' @author Martin Schmettow
+#' @export
+
+
+
+discard_redundant <- function(D){
+  a <- as.matrix(D)
+  nonred <- plyr::aaply(a, 2, function(v) length(unique(v)) > 1)
+  D[, nonred]
+}
 

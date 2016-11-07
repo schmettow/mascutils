@@ -20,4 +20,3 @@ adding columns that don't exist yet
 \author{
 Martin Schmettow
 }
-

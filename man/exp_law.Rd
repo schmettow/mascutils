@@ -24,4 +24,3 @@ the exponential law of learning in previous experience parametrization
 \author{
 Martin Schmettow
 }
-

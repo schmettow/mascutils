@@ -24,4 +24,3 @@ The (simple) range of columns are z-transformed and added to the data frame (foo
 \author{
 Martin Schmettow
 }
-
