@@ -15,3 +15,7 @@ test_that("discard_all_na",{
   expect_equal(colnames(discard_all_na(d)), c("x", "z"))
 })
 
+dplyr::data_frame(a = c(1:5),
+                  b = c(6:10)) %>%
+  mascutils::z_score("a") %>%
+  mascutils::z_score("b")
