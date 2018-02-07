@@ -5,6 +5,7 @@
 \alias{as_tbl_obs.tbl_df}
 \alias{as_tbl_obs.data.frame}
 \alias{print.tbl_obs}
+\alias{knit_print.tbl_obs}
 \title{tibble class for observations}
 \usage{
 as_tbl_obs(x)
@@ -13,7 +14,9 @@ as_tbl_obs(x)
 
 \method{as_tbl_obs}{data.frame}(x)
 
-\method{print}{tbl_obs}(x, n = 8)
+\method{print}{tbl_obs}(x, ...)
+
+knit_print.tbl_obs(x, ...)
 }
 \arguments{
 \item{x}{a data frame}

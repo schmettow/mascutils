@@ -1,11 +1,11 @@
 Package: mascutils
 Type: Package
 Title: Various utility functions of Martin Schmettow
-Version: 0.2.0
+Version: 0.2.1
 Author: Martin Schmettow
 Maintainer: Martin Schmettow <schmettow@web.de>
-Description: Various utility functions from math and data
-    manipulation
+Description: Various utility functions for math, data
+    manipulation and reporting with knitr
 License: GPL-3
 LazyData: TRUE
 Depends:

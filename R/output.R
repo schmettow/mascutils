@@ -12,6 +12,7 @@
 #' on both, console and knitr output.
 #'
 #' @author Martin Schmettow
+#' @importFrom knitr knit_print
 #' @export
 
 as_tbl_obs <- function(x) UseMethod("as_tbl_obs", x)
@@ -36,7 +37,8 @@ as_tbl_obs.data.frame <- function(x) {
 #' @rdname as_tbl_obs
 #' @export
 
-print.tbl_obs <- function(x, n = 8) {
+print.tbl_obs <- function(x, ...) {
+  n <- min(8, nrow(x))
   cap <- stringr::str_c("showing ", n, " of ", nrow(x), " observations")
   tab <- dplyr::sample_n(x, n)
   if("Obs" %in% colnames(tab)) tab <- dplyr::arrange(tab, Obs)
@@ -45,5 +47,11 @@ print.tbl_obs <- function(x, n = 8) {
     kableExtra::kable_styling(full_width = F) %>%
     kableExtra::add_footnote(c(cap), notation = "symbol")
   print(tab)
-
+  invisible(tab)
 }
+
+#' @rdname as_tbl_obs
+#' @export
+
+knit_print.tbl_obs <- function(x, ...) print.tbl_obs(x, ...)
+
