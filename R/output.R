@@ -21,6 +21,8 @@ as_tbl_obs <- function(x) UseMethod("as_tbl_obs", x)
 #' @export
 
 as_tbl_obs.tbl_df <- function(x) {
+  x <- mutate(x, Obs = row_number()) %>%
+    mascutils::go_first(Obs)
   class(x) <- c("tbl_obs", class(x))
   x
 }
@@ -29,7 +31,8 @@ as_tbl_obs.tbl_df <- function(x) {
 #' @export
 
 as_tbl_obs.data.frame <- function(x) {
-  x <- tibble::as_tibble(x)
+  x <- tibble::as_tibble(x) %>%
+    as_tbl_obs.tbl_df(x)
   class(x) <- c("tbl_obs", class(x))
   x
 }
@@ -39,13 +42,9 @@ as_tbl_obs.data.frame <- function(x) {
 
 print.tbl_obs <- function(x, ...) {
   n <- min(8, nrow(x))
-  cap <- stringr::str_c("showing ", n, " of ", nrow(x), " observations")
   tab <- dplyr::sample_n(x, n)
   if("Obs" %in% colnames(tab)) tab <- dplyr::arrange(tab, Obs)
   if("Part" %in% colnames(tab)) tab <- dplyr::arrange(tab, Part)
-  tab <- knitr::kable(tab, align = "c") %>%
-    kableExtra::kable_styling(full_width = F) %>%
-    kableExtra::add_footnote(c(cap), notation = "symbol")
   print(tab)
   invisible(tab)
 }
@@ -53,5 +52,17 @@ print.tbl_obs <- function(x, ...) {
 #' @rdname as_tbl_obs
 #' @export
 
-knit_print.tbl_obs <- function(x, ...) print.tbl_obs(x, ...)
+knit_print.tbl_obs <- function(x, ...) {
+  #data_set <- deparse(substitute(x))
+  n <- min(8, nrow(x))
+  tab <- dplyr::sample_n(x, n)
+  if("Obs" %in% colnames(tab)) tab <- dplyr::arrange(tab, Obs)
+  if("Part" %in% colnames(tab)) tab <- dplyr::arrange(tab, Part)
+  cap <- stringr::str_c("Data set",": showing ", n, " of ", nrow(x), " observations")
+  out <- knitr::kable(tab, caption = cap)
+  print(out)
+  invisible(tab)
+}
 
+#' @rdname as_tbl_obs
+#' @export
