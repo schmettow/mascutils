@@ -4,16 +4,12 @@
 \alias{z_score}
 \title{Adding z-scores}
 \usage{
-z_score(D, range, na.rm = T, add = T)
+z_score(D, ...)
 }
 \arguments{
 \item{D}{data frame}
 
-\item{range}{expression}
-
-\item{na.rm}{ignoring missing values (TRUE)}
-
-\item{add}{adding z scores (TRUE)}
+\item{...}{dplyr::select range of variables}
 }
 \value{
 data frame

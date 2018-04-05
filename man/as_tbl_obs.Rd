@@ -16,7 +16,7 @@ as_tbl_obs(x)
 
 \method{print}{tbl_obs}(x, ...)
 
-knit_print.tbl_obs(x, ...)
+\method{knit_print}{tbl_obs}(x, ...)
 }
 \arguments{
 \item{x}{a data frame}

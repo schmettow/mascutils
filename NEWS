@@ -1,0 +1,11 @@
+NEWS
+
+0.2.2
+
++ switching to tidy eval with rlang
++ gofirst/go_arrange make use of multiple columns
++ gofirst/go_arrange no longer take formulas as parameters
++ z_score works with ranges of columns
++ z_score now always does na.rm = T and adds columns
++ as.tbl_obs always creates a variable Obs
++ split the print methods for as_tbl_obs (normal and knitr)
