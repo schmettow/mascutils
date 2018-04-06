@@ -15,6 +15,7 @@
 #' @importFrom knitr knit_print
 #' @export
 
+
 as_tbl_obs <- function(x) UseMethod("as_tbl_obs", x)
 
 #' @rdname as_tbl_obs
