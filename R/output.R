@@ -47,7 +47,7 @@ print.tbl_obs <- function(x, ...) {
   if("Obs" %in% colnames(tab)) tab <- dplyr::arrange(tab, Obs)
   if("Part" %in% colnames(tab)) tab <- dplyr::arrange(tab, Part)
   print(tab)
-  invisible(tab)
+  invisible(x)
 }
 
 #' @rdname as_tbl_obs
@@ -62,7 +62,7 @@ knit_print.tbl_obs <- function(x, ...) {
   cap <- stringr::str_c("Data set",": showing ", n, " of ", nrow(x), " observations")
   out <- knitr::kable(tab, caption = cap)
   print(out)
-  invisible(tab)
+  invisible(x)
 }
 
 #' @rdname as_tbl_obs
