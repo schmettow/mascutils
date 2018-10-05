@@ -164,6 +164,8 @@ any_not_na <-
 
 
 discard_redundant <- function(D){
+  if(nrow(D) < 2) return(D)
+
   a <- as.matrix(D)
   nonred <- plyr::aaply(a, 2, function(v) length(unique(v)) > 1)
   D[, nonred]
