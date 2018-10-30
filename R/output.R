@@ -33,7 +33,7 @@ as_tbl_obs.tbl_df <- function(x) {
 
 as_tbl_obs.data.frame <- function(x) {
   x <- tibble::as_tibble(x) %>%
-    as_tbl_obs.tbl_df(x)
+    as_tbl_obs.tbl_df()
   class(x) <- c("tbl_obs", class(x))
   x
 }
