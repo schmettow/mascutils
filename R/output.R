@@ -48,7 +48,7 @@ print.tbl_obs <- function(x, ...) {
   if("Part" %in% colnames(tab)) tab <- dplyr::arrange(tab, Part)
   cap <- stringr::str_c("Data set",": showing ", n, " of ", nrow(x), " observations")
   print(cap)
-  print(tab)
+  base:::print.data.frame(tab)
   invisible(x)
 }
 
@@ -61,11 +61,13 @@ knit_print.tbl_obs <- function(x, ...) {
   tab <- dplyr::sample_n(x, n)
   if("Obs" %in% colnames(tab)) tab <- dplyr::arrange(tab, Obs)
   if("Part" %in% colnames(tab)) tab <- dplyr::arrange(tab, Part)
-  cap <- stringr::str_c("Data set",": showing ", n, " of ", nrow(x), " observations")
-
-  res = paste(c("", "", knitr::kable(tab, caption = cap, ...)),
-              collapse = "\n")
-  knitr::asis_output(res)
+  # cap <- stringr::str_c("Data set",": showing ", n, " of ", nrow(x), " observations")
+  #
+  # res = paste(c("", "", knitr::kable(tab, format = "markdown", ...)),
+  #             collapse = "\n")
+  # knitr::asis_output(res)
+  class(tab)<- c("tbl_df", "tbl", "data.frame")
+  invisible(tab)
 }
 
 #' @rdname as_tbl_obs

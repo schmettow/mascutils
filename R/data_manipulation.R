@@ -12,7 +12,7 @@
 
 expand_grid <-
   function(...)
-    expand.grid(stringsAsFactors = F, ...) %>% tibble::as_data_frame()
+    expand.grid(stringsAsFactors = F, ...) %>% tibble::as_tibble()
 
 
 #' Moving column to first position
@@ -88,6 +88,52 @@ left_union <-
   }
 
 
+#' update columns conditionally
+#'
+#'
+#' @param D data frame
+#' @param filter predicate function (like dplyr::filter)
+#' @param ... expressions
+#' @return data frame
+#'
+#' Applies mutations to the filtered group, only.
+#'
+#' @examples
+#' D <- tribble(~group, ~value,  1, 4, 1, 9, 2, -4, 2, -9)
+#'
+#' D %>% mutate(value = if_else(group == 1, sqrt(value), value))
+#' ## Produces NaNs, because sqrt() is evaluated before selection
+#'
+#' D %>% mutate_by(group == 1, value = sqrt(value))
+#' ## sqrt() is only evaluated
+#'
+#' @author Martin Schmettow
+#' @export
+
+
+
+update_by <-
+  function(D, by, ...){
+    flt <- enquo(by)
+    args <- enquos(...)
+
+    missing_cols <- dplyr::setdiff(names(args), names(D))
+    if (length(missing_cols > 0)) stop(paste0("\nColumn does not exist: ",
+                                              missing_cols))
+
+    D <- dplyr::mutate(D, .tmp_idx = dplyr::row_number())
+
+    mut <- D %>%
+      dplyr::filter(!!flt) %>%
+      dplyr::mutate(!!!args)
+
+    rmn <- D %>%
+      dplyr::filter(!(!!flt))
+
+    bind_rows(mut, rmn) %>%
+      dplyr::arrange(.tmp_idx) %>%
+      dplyr::select(-.tmp_idx)
+  }
 
 
 

@@ -1,7 +1,7 @@
 Package: mascutils
 Type: Package
 Title: Various utility functions of Martin Schmettow
-Version: 0.2.3
+Version: 0.2.4
 Author: Martin Schmettow
 Maintainer: Martin Schmettow <schmettow@web.de>
 Description: Various utility functions for math, data
@@ -17,4 +17,4 @@ Imports:
     tibble
 Suggests:
     testthat
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
