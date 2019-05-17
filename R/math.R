@@ -62,4 +62,3 @@ mode <- function(x) {
   # binning$bin + bin_width/2
 }
 
-mode(rnorm(100))
