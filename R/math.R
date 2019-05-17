@@ -36,3 +36,30 @@ inv_logit <-
 exp_law <-
   function(pexp, rate, asym, N) asym * (1 + exp(-rate * (N + pexp)))
 
+
+#' mode
+#'
+#' estimation of the mode. Uses mofdeest::shorth
+#' Will be replaced by an own implementation to work around the
+#' odd dependencies of modeest (genefilter fro BioConductor).
+#'
+#' @param x data
+#' @return numerical
+#'
+#' @author Martin Schmettow
+#' @export
+
+mode <- function(x) {
+  modeest::shorth(x)
+  # binning <-
+  #   tibble(x = x) %>%
+  #   mutate(bin = x%/%bin_width) %>%
+  #   group_by(bin) %>%
+  #   summarize(N = n()) %>%
+  #   ungroup() %>%
+  #   filter(N == max(N))
+  #
+  # binning$bin + bin_width/2
+}
+
+mode(rnorm(100))
