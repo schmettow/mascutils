@@ -139,7 +139,7 @@ update_by <-
 
 
 
-#' Adding z-scores
+#' Adding z-transformed scores
 #'
 #' The (simple) range of columns are z-transformed and added to the data frame (foo_z)
 #'
@@ -154,7 +154,7 @@ update_by <-
 #' @export
 
 
-z_score <- function(D,  ...){
+z_trans <- function(D,  ...){
   col_spec <- quos(...)
   df_z <- dplyr::select(D, !!!col_spec) %>%
     transmute_all(z)
@@ -163,6 +163,12 @@ z_score <- function(D,  ...){
 }
 
 z <- function(x) (x - mean(x, na.rm = T))/sd(x, na.rm = T)
+
+#' @rdname z_trans
+#' @export
+
+z_score <- z_trans
+
 
 ## TODO:
 # check out dplyr:::select_.data.frame for how to use dplyrs column expansion
