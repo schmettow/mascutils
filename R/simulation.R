@@ -16,7 +16,10 @@
 #' @export
 
 rrating_scale <- function(N, mu, sd, ends = c(1, 5), bin = TRUE){
-  out <- Leibniz:::rlogitnorm(N, mu, sd) * ends[2] + ends[1]
+  out <- rlogitnorm(N, mu, sd) * ends[2] + ends[1]
   if(bin) out <- as.integer(out)
   out
 }
+
+
+function(n,mu,sd) plogis(rnorm(n,mu,sd))
