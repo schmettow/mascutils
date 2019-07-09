@@ -1,7 +1,7 @@
 Package: mascutils
 Type: Package
 Title: Various utility functions of Martin Schmettow
-Version: 0.3.0
+Version: 0.3.1
 Author: Martin Schmettow
 Maintainer: Martin Schmettow <schmettow@web.de>
 Description: Various utility functions for math, data
