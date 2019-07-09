@@ -170,6 +170,56 @@ z <- function(x) (x - mean(x, na.rm = T))/sd(x, na.rm = T)
 z_score <- z_trans
 
 
+#' centered rescaling
+#'
+#' symmetrically scales a variable up or down, maintaining the center of the scale
+#'
+#' @param x numerical vector
+#' @param scale rescale factor
+#' @return numerical vector
+#'
+#'
+#' @author Martin Schmettow
+#' @import dplyr
+#' @import tidyr
+#' @export
+
+
+rescale_centered <- function(x, scale = .999){
+  mean_x <- mean(x, na.rm = T)
+  x_center <- x - mean_x
+  x_shrink <- x_center * scale
+  out <- x_shrink + mean_x
+  out
+}
+
+#' rescaling to unit interval
+#'
+#' scales a variable to the interval [0;1]
+#'
+#' @param x numerical vector
+#' @param lower lowest possible value
+#' @param upper highest possible value
+#' @return numerical vector
+#'
+#'
+#' @author Martin Schmettow
+#' @import dplyr
+#' @import tidyr
+#' @export
+
+
+rescale_zero_one <- function(x,
+                             lower = min(x, na.rm = T),
+                             upper = max(x, na.rm = T), scale = 1){
+  x_to_zero <- x - lower
+  x_to_one <- x_to_zero/upper
+  out <- rescale_centered(x_to_one, scale = scale)
+  out
+}
+
+
+
 ## TODO:
 # check out dplyr:::select_.data.frame for how to use dplyrs column expansion
 
