@@ -22,4 +22,4 @@ rrating_scale <- function(N, mu, sd, ends = c(1, 5), bin = TRUE){
 }
 
 
-function(n,mu,sd) plogis(rnorm(n,mu,sd))
+rlogitnorm <- function(n,mu,sd) plogis(rnorm(n,mu,sd))
