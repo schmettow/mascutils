@@ -209,17 +209,20 @@ rescale_centered <- function(x, scale = .999){
 #' @export
 
 
-rescale_zero_one <- function(x,
+rescale_unit     <- function(x,
                              lower = min(x, na.rm = T),
                              upper = max(x, na.rm = T), scale = 1){
   x_to_zero <- x - lower
-  x_to_one <- x_to_zero/upper
+  x_to_one <- x_to_zero/(upper -lower)
   out <- rescale_centered(x_to_one, scale = scale)
+  out <- x_to_one
   out
 }
 
+#' @rdname rescale_unit
+#' @export
 
-
+rescale_zero_one <- rescale_unit
 ## TODO:
 # check out dplyr:::select_.data.frame for how to use dplyrs column expansion
 
