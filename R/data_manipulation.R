@@ -259,20 +259,39 @@ any_not_na <-
 #' all variables that do not vary are discarded
 #'
 #' @param D data frame
+#' @param except vector of column names to keep
 #' @return data frame
 #'
 #'
 #' @author Martin Schmettow
 #' @export
 
+discard_redundant <-
+  function(D, except, ...) UseMethod("discard_redundant", D)
 
 
-
-discard_redundant <- function(D){
+#' @rdname discard_redundant
+#' @export
+#'
+discard_redundant.default <- function(D, except = c()){
   if(nrow(D) < 2) return(D)
+  colnames <- colnames(D)
+  cols_except <- colnames %in% except
+  cols_nonred <- plyr::aaply(as.matrix(D), 2, function(v) length(unique(v)) > 1)
+  cols_keep   <- cols_except | cols_nonred
 
-  a <- as.matrix(D)
-  nonred <- plyr::aaply(a, 2, function(v) length(unique(v)) > 1)
-  D[, nonred]
+  D[, c(cols_keep)]
 }
+
+
+
+
+
+# discard_redundant <- function(D){
+#   if(nrow(D) < 2) return(D)
+#
+#   a <- as.matrix(D)
+#   nonred <- plyr::aaply(a, 2, function(v) length(unique(v)) > 1)
+#   D[, c(nonred)]
+# }
 
