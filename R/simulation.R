@@ -16,7 +16,7 @@
 #' @export
 
 rrating_scale <- function(N, mu, sd, ends = c(1, 5), bin = TRUE){
-  out <- rlogitnorm(N, mu, sd) * ends[2] + ends[1]
+  out <- mascutils:::rlogitnorm(N, mu, sd) * ends[2] + ends[1]
   if(bin) out <- as.integer(out)
   out
 }
