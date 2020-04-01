@@ -2,6 +2,7 @@
 
 S3method(as_tbl_obs,data.frame)
 S3method(as_tbl_obs,tbl_df)
+S3method(discard_redundant,default)
 S3method(knit_print,tbl_obs)
 S3method(print,tbl_obs)
 export(as_tbl_obs)

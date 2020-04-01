@@ -5,11 +5,19 @@
 \alias{rescale_zero_one}
 \title{rescaling to unit interval}
 \usage{
-rescale_unit(x, lower = min(x, na.rm = T), upper = max(x, na.rm = T),
-  scale = 1)
+rescale_unit(
+  x,
+  lower = min(x, na.rm = T),
+  upper = max(x, na.rm = T),
+  scale = 1
+)
 
-rescale_zero_one(x, lower = min(x, na.rm = T), upper = max(x, na.rm =
-  T), scale = 1)
+rescale_zero_one(
+  x,
+  lower = min(x, na.rm = T),
+  upper = max(x, na.rm = T),
+  scale = 1
+)
 }
 \arguments{
 \item{x}{numerical vector}
