@@ -3,7 +3,7 @@
 \name{discard_redundant}
 \alias{discard_redundant}
 \alias{discard_redundant.default}
-\title{Removing redundant variables}
+\title{Remove redundant variables}
 \usage{
 discard_redundant(D, except, ...)
 
@@ -18,7 +18,7 @@ discard_redundant(D, except, ...)
 data frame
 }
 \description{
-all variables that do not vary are discarded
+all variables that have a constant value are removed from a data frame
 }
 \author{
 Martin Schmettow

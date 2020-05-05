@@ -254,9 +254,9 @@ any_not_na <-
   function(x) !all_na(x)
 
 
-#' Removing redundant variables
+#' Remove redundant variables
 #'
-#' all variables that do not vary are discarded
+#' all variables that have a constant value are removed from a data frame
 #'
 #' @param D data frame
 #' @param except vector of column names to keep
@@ -284,8 +284,35 @@ discard_redundant.default <- function(D, except = c()){
 }
 
 
+#' Re-order levels of a factor
+#'
+#' Re-orders the levels of a factor by a vector of new positions.
+#'
+#' @param x factor
+#' @param positions vector of positions
+#' @return factor
+#'
+#'
+#' @author Martin Schmettow
+#' @export
 
 
+reorder_levels <- function(x, positions){
+  levels <- unique(x)
+  if(length(positions) != length(levels))
+    stop(stringr::str_c("Number of positions (",length(positions),")
+                           does not match number of levels (", length(levels) ,")"))
+  missing <- setdiff(1:length(levels), positions)
+  above <- setdiff(positions, 1:length(levels))
+  if(length(missing) | length(above)) {
+    stop(stringr::str_c("Invalid positions vector. Must contain exactly the values 1:", length(levels)))
+  }
+  out <- factor(x, levels = levels[positions])
+  out
+}
+
+# x <- c("A", "B", "C")
+# reorder_levels(x, c(3,2,4))
 
 # discard_redundant <- function(D){
 #   if(nrow(D) < 2) return(D)
